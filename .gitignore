@@ -1,7 +1,4 @@
-*.hex
-*.o
-*.elf
-*.DS_Store
-*.d
+CPU1/Debug/*
+CPU2/Debug/*
 
 README.md
