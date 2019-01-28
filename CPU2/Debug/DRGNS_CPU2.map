@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v18.1.3                     
 ******************************************************************************
->> Linked Mon Jan 28 01:53:14 2019
+>> Linked Mon Jan 28 03:25:19 2019
 
 OUTPUT FILE NAME:   <DRGNS_CPU2.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 00008062
@@ -517,16 +517,20 @@ MODULE SUMMARY
        Module                           code   initialized data   uninitialized data
        ------                           ----   ----------------   ------------------
     .\
+       main_cpu2.obj                    167    0                  0                 
+    +--+--------------------------------+------+------------------+--------------------+
+       Total:                           167    0                  0                 
+                                                                                    
+    .\F2837xD\
        F2837xD_GlobalVariableDefs.obj   0      0                  7630              
        F2837xD_DefaultISR.obj           1413   0                  0                 
        F2837xD_SysCtrl.obj              562    0                  0                 
        F2837xD_PieVect.obj              38     448                0                 
-       main_cpu2.obj                    167    0                  0                 
        F2837xD_PieCtrl.obj              40     0                  0                 
        F2837xD_EQep.obj                 34     0                  0                 
        F2837xD_usDelay.obj              4      0                  0                 
     +--+--------------------------------+------+------------------+--------------------+
-       Total:                           2258   448                7630              
+       Total:                           2091   448                7630              
                                                                                     
     C:\ti\ccsv8\tools\compiler\ti-cgt-c2000_18.1.3.LTS\lib\rts2800_fpu32.lib
        boot28.asm.obj                   86     0                  0                 

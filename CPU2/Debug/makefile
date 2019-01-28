@@ -10,16 +10,16 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./F2837xD_DefaultISR.obj" \
-"./F2837xD_EQep.obj" \
-"./F2837xD_GlobalVariableDefs.obj" \
-"./F2837xD_PieCtrl.obj" \
-"./F2837xD_PieVect.obj" \
-"./F2837xD_SysCtrl.obj" \
-"./F2837xD_usDelay.obj" \
 "./main_cpu2.obj" \
-"../2837xD_RAM_lnk_cpu2.cmd" \
-"../F2837xD_Headers_nonBIOS_cpu2.cmd" \
+"./F2837xD/F2837xD_DefaultISR.obj" \
+"./F2837xD/F2837xD_EQep.obj" \
+"./F2837xD/F2837xD_GlobalVariableDefs.obj" \
+"./F2837xD/F2837xD_PieCtrl.obj" \
+"./F2837xD/F2837xD_PieVect.obj" \
+"./F2837xD/F2837xD_SysCtrl.obj" \
+"./F2837xD/F2837xD_usDelay.obj" \
+"../F2837xD/2837xD_RAM_lnk_cpu2.cmd" \
+"../F2837xD/F2837xD_Headers_nonBIOS_cpu2.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
 
@@ -31,7 +31,9 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
+-include F2837xD/subdir_vars.mk
 -include subdir_rules.mk
+-include F2837xD/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -162,9 +164,9 @@ DRGNS_CPU2.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "F2837xD_DefaultISR.obj" "F2837xD_EQep.obj" "F2837xD_GlobalVariableDefs.obj" "F2837xD_PieCtrl.obj" "F2837xD_PieVect.obj" "F2837xD_SysCtrl.obj" "F2837xD_usDelay.obj" "main_cpu2.obj" 
-	-$(RM) "F2837xD_DefaultISR.d" "F2837xD_EQep.d" "F2837xD_GlobalVariableDefs.d" "F2837xD_PieCtrl.d" "F2837xD_PieVect.d" "F2837xD_SysCtrl.d" "main_cpu2.d" 
-	-$(RM) "F2837xD_usDelay.d" 
+	-$(RM) "main_cpu2.obj" "F2837xD\F2837xD_DefaultISR.obj" "F2837xD\F2837xD_EQep.obj" "F2837xD\F2837xD_GlobalVariableDefs.obj" "F2837xD\F2837xD_PieCtrl.obj" "F2837xD\F2837xD_PieVect.obj" "F2837xD\F2837xD_SysCtrl.obj" "F2837xD\F2837xD_usDelay.obj" 
+	-$(RM) "main_cpu2.d" "F2837xD\F2837xD_DefaultISR.d" "F2837xD\F2837xD_EQep.d" "F2837xD\F2837xD_GlobalVariableDefs.d" "F2837xD\F2837xD_PieCtrl.d" "F2837xD\F2837xD_PieVect.d" "F2837xD\F2837xD_SysCtrl.d" 
+	-$(RM) "F2837xD\F2837xD_usDelay.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

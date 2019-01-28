@@ -26,6 +26,11 @@
 #define GRBL_VERSION_BUILD "20181112"
 
 // Define standard libraries used by Grbl.
+#include "F28x_Project.h"
+#include "F2837xD_Ipc_drivers.h"
+#include "I2C_SSD1306.h"
+#include "SCI.h"
+#include "stdio.h"
 //#include <avr/io.h> TODO
 //#include <avr/pgmspace.h>
 //#include <avr/interrupt.h>

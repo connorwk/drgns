@@ -26,24 +26,34 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>F2837xD_EQep.c</name>
+			<name>F2837xD/F2837xD_EQep.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/CPU1/F2837xD_EQep.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/CPU1/F2837xD/F2837xD_EQep.c</locationURI>
 		</link>
 		<link>
-			<name>F2837xD_PieCtrl.c</name>
+			<name>F2837xD/F2837xD_GlobalVariableDefs.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/CPU1/F2837xD_PieCtrl.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/CPU1/F2837xD/F2837xD_GlobalVariableDefs.c</locationURI>
 		</link>
 		<link>
-			<name>F2837xD_PieVect.c</name>
+			<name>F2837xD/F2837xD_PieCtrl.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/CPU1/F2837xD_PieVect.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/CPU1/F2837xD/F2837xD_PieCtrl.c</locationURI>
 		</link>
 		<link>
-			<name>F2837xD_SysCtrl.c</name>
+			<name>F2837xD/F2837xD_PieVect.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/CPU1/F2837xD_SysCtrl.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/CPU1/F2837xD/F2837xD_PieVect.c</locationURI>
+		</link>
+		<link>
+			<name>F2837xD/F2837xD_SysCtrl.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/CPU1/F2837xD/F2837xD_SysCtrl.c</locationURI>
+		</link>
+		<link>
+			<name>F2837xD/F2837xD_usDelay.asm</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/CPU1/F2837xD/F2837xD_usDelay.asm</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
