@@ -1,6 +1,6 @@
 /*
  * SCI.c
- *
+ * Simple SCI unit init and control.
  *  Created on: Jan 26, 2019
  *      Author: win7 vm
  */

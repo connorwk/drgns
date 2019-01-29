@@ -1,8 +1,12 @@
 /*
  * I2C_SSD1306.c
+ * I2C libarary for talking to the SSD1306 display.
+ * This is specifically for the cheap ~2 dollar units you can get from china 128x32.
+ * But changing the init values should allow this to work with any SSD1306 display.
+ * Currently all that is suppored is displaying simple text.
  *
  *  Created on: Jan 14, 2019
- *      Author: win7 vm
+ *      Author: Connor Krukosky
  */
 
 #include "F28x_Project.h"
