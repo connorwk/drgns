@@ -32,6 +32,8 @@
 
 void limits_init()
 {
+  // TODO
+  /*
   LIMIT_DDR &= ~(LIMIT_MASK); // Set as input pins
 
   #ifdef DISABLE_LIMIT_PIN_PULL_UP
@@ -52,14 +54,18 @@ void limits_init()
     WDTCSR |= (1<<WDCE) | (1<<WDE);
     WDTCSR = (1<<WDP0); // Set time-out at ~32msec.
   #endif
+  */
 }
 
 
 // Disables hard limits.
 void limits_disable()
 {
+  // TODO
+  /*
   LIMIT_PCMSK &= ~LIMIT_MASK;  // Disable specific pins of the Pin Change Interrupt
   PCICR &= ~(1 << LIMIT_INT);  // Disable Pin Change Interrupt
+  */
 }
 
 
@@ -68,6 +74,8 @@ void limits_disable()
 // number in bit position, i.e. Z_AXIS is (1<<2) or bit 2, and Y_AXIS is (1<<1) or bit 1.
 uint8_t limits_get_state()
 {
+  // TODO
+  /*
   uint8_t limit_state = 0;
   uint8_t pin = (LIMIT_PIN & LIMIT_MASK);
   #ifdef INVERT_LIMIT_PIN_MASK
@@ -81,6 +89,7 @@ uint8_t limits_get_state()
     }
   }
   return(limit_state);
+  */
 }
 
 

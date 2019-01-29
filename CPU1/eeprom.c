@@ -21,8 +21,8 @@
 *                         $Revision: 1.6 $
 *                         $Date: Friday, February 11, 2005 07:16:44 UTC $
 ****************************************************************************/
-#include <avr/io.h>
-#include <avr/interrupt.h>
+//#include <avr/io.h>
+//#include <avr/interrupt.h>
 
 /* These EEPROM bits have different names on different devices. */
 #ifndef EEPE
@@ -48,10 +48,13 @@
  */
 unsigned char eeprom_get_char( unsigned int addr )
 {
+  // TODO
+  /*
 	do {} while( EECR & (1<<EEPE) ); // Wait for completion of previous write.
 	EEAR = addr; // Set EEPROM address register.
 	EECR = (1<<EERE); // Start EEPROM read operation.
 	return EEDR; // Return the byte read from EEPROM.
+	*/
 }
 
 /*! \brief  Write byte to EEPROM.
@@ -73,6 +76,8 @@ unsigned char eeprom_get_char( unsigned int addr )
  */
 void eeprom_put_char( unsigned int addr, unsigned char new_value )
 {
+  // TODO
+  /*
 	char old_value; // Old EEPROM value.
 	char diff_mask; // Difference mask, i.e. old value XOR new value.
 
@@ -122,6 +127,7 @@ void eeprom_put_char( unsigned int addr, unsigned char new_value )
 	}
 	
 	sei(); // Restore interrupt flag state.
+	*/
 }
 
 // Extensions added as part of Grbl 

@@ -26,11 +26,8 @@
 #define GRBL_VERSION_BUILD "20181112"
 
 // Define standard libraries used by Grbl.
-#include "F28x_Project.h"
-#include "F2837xD_Ipc_drivers.h"
-#include "I2C_SSD1306.h"
-#include "SCI.h"
-#include "stdio.h"
+// New stuff for F2837xD support.
+#include <F2837xD_support.h>
 //#include <avr/io.h> TODO
 //#include <avr/pgmspace.h>
 //#include <avr/interrupt.h>
@@ -42,7 +39,6 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
-typedef uint_fast8_t uint8_t;
 
 // Define the Grbl system include files. NOTE: Do not alter organization.
 #include "config.h"

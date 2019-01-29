@@ -32,11 +32,23 @@ void printString(const char *s)
 // Print a string stored in PGM-memory
 void printPgmString(const char *s)
 {
+  // TODO
+  // https://www.nongnu.org/avr-libc/user-manual/group__avr__pgmspace.html#ga88d7dd4863f87530e1a34ece430a587c
+  // https://www.nongnu.org/avr-libc/user-manual/group__avr__pgmspace.html
+  /*
   char c;
   while ((c = pgm_read_byte_near(s++)))
     serial_write(c);
+  */
 }
 
+// HERE TO MAKE CODE COMPILE FOR NOW...
+// TODO REMOVE ALL INSTANCES OF PSTR IN CODE AND REPLACE WITH TI EQUIVELANT
+void PSTR(const char *s)
+{
+  // TODO
+  // https://www.nongnu.org/avr-libc/user-manual/group__avr__pgmspace.html
+}
 
 // void printIntegerInBase(unsigned long n, unsigned long base)
 // {

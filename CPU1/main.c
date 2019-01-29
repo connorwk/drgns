@@ -19,6 +19,9 @@
   along with Grbl.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// TODO
+// GO THROUGHOUT ALL INIT CODE IN VARIOUS LOCATIONS TO INIT THE NEW C2000 CHIP INSTEAD OF WHATEVER AVR CRAP WAS INIT'D BEFORE
+
 #include "grbl.h"
 
 
@@ -45,7 +48,8 @@ int main(void)
   system_init();   // Configure pinout pins and pin-change interrupt
 
   memset(sys_position,0,sizeof(sys_position)); // Clear machine position.
-  sei(); // Enable interrupts
+  // TODO all of this will be replaced eventually but this is the only line to be commented out for compile:
+  //sei(); // Enable interrupts
 
   // Initialize system state.
   #ifdef FORCE_INITIALIZATION_ALARM

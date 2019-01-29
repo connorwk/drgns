@@ -26,6 +26,8 @@
   methods to accomodate their needs.
 */
 
+// TODO REMOVE/REPLACE ALL INSTANCES OF printPgmString(PSTR(""));
+
 #include "grbl.h"
 
 

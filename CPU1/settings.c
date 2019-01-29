@@ -23,6 +23,8 @@
 
 settings_t settings;
 
+// TODO
+/*
 const __flash settings_t defaults = {\
     .pulse_microseconds = DEFAULT_STEP_PULSE_MICROSECONDS,
     .stepper_idle_lock_time = DEFAULT_STEPPER_IDLE_LOCK_TIME,
@@ -58,7 +60,7 @@ const __flash settings_t defaults = {\
     .max_travel[X_AXIS] = (-DEFAULT_X_MAX_TRAVEL),
     .max_travel[Y_AXIS] = (-DEFAULT_Y_MAX_TRAVEL),
     .max_travel[Z_AXIS] = (-DEFAULT_Z_MAX_TRAVEL)};
-
+*/
 
 // Method to store startup lines into EEPROM
 void settings_store_startup_line(uint8_t n, char *line)
@@ -102,8 +104,9 @@ void write_global_settings()
 
 // Method to restore EEPROM-saved Grbl global settings back to defaults.
 void settings_restore(uint8_t restore_flag) {
-  if (restore_flag & SETTINGS_RESTORE_DEFAULTS) {    
-    settings = defaults;
+  if (restore_flag & SETTINGS_RESTORE_DEFAULTS) {
+    // TODO
+    //settings = defaults;
     write_global_settings();
   }
 
