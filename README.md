@@ -3,6 +3,9 @@ An open source, embedded, high performance g-code-parser and CNC milling control
 
 DRGNS stands for:
 Delphino Replacement GRBL Now with Servos
+or
+Delphino Replacement GRBL aNd Servos
+(Blame my friend Nathan for this suggestion.)
 
 This is a port of grbl to the TI C2000 Delphino line of DSPs.
 I am developing this on the TI LAUNCHXL-F28379D Launchpad. A cheap development board for the DSP:
