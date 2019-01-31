@@ -60,7 +60,8 @@ SECTIONS
    .stack           : > RAMM1,     PAGE = 1
    .ebss            : > RAMLS5,    PAGE = 1
    .econst          : > RAMLS5,    PAGE = 1
-   .esysmem         : > RAMLS5,    PAGE = 1
+   //.esysmem         : > RAMLS5,    PAGE = 1
+   .esysmem         : > RAMLS4,    PAGE = 0
    Filter_RegsFile  : > RAMGS0,	   PAGE = 1
 
    ramgs0           : > RAMGS0,    PAGE = 1

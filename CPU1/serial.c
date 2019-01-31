@@ -64,31 +64,32 @@ uint8_t serial_get_tx_buffer_count()
 
 void serial_init()
 {
-  // TODO
-  /*
-  // Set baud rate
-  #if BAUD_RATE < 57600
-    uint16_t UBRR0_value = ((F_CPU / (8L * BAUD_RATE)) - 1)/2 ;
-    UCSR0A &= ~(1 << U2X0); // baud doubler off  - Only needed on Uno XXX
-  #else
-    uint16_t UBRR0_value = ((F_CPU / (4L * BAUD_RATE)) - 1)/2;
-    UCSR0A |= (1 << U2X0);  // baud doubler on for high baud rates, i.e. 115200
-  #endif
-  UBRR0H = UBRR0_value >> 8;
-  UBRR0L = UBRR0_value;
+  //
+  // Note: Clocks were turned on to the SCIA peripheral
+  // in the InitSysCtrl() function
+  //
 
-  // enable rx, tx, and interrupt on complete reception of a byte
-  UCSR0B |= (1<<RXEN0 | 1<<TXEN0 | 1<<RXCIE0);
+  SciaRegs.SCICCR.all = 0x0007;   // 1 stop bit,  No loopback
+                                  // No parity,8 char bits,
+                                  // async mode, idle-line protocol
+  SciaRegs.SCICTL1.all = 0x0003;  // enable TX, RX, internal SCICLK,
+                                  // Disable RX ERR, SLEEP, TXWAKE
+  SciaRegs.SCICTL2.all = 0x0002;  // RXBKINTENA
 
-  // defaults to 8-bit, no parity, 1 stop bit
-  */
+  //
+  // SCIA at 115200
+  // @LSPCLK = 50 MHz (200 MHz SYSCLK) Default LSPCLK divider.
+  //
+  uint16_t BBR = ((F_CPU * 1000000L) / ((BAUD_RATE * 8L) - 1));
+  SciaRegs.SCIHBAUD.all = (BBR & 0xFF00) >> 8;
+  SciaRegs.SCILBAUD.all = BBR & 0xFF;
+
+  SciaRegs.SCICTL1.all = 0x0023;  // Relinquish SCI from Reset
 }
 
 
 // Writes one byte to the TX serial buffer. Called by main program.
 void serial_write(uint8_t data) {
-  // TODO
-  /*
   // Calculate next head
   uint8_t next_head = serial_tx_buffer_head + 1;
   if (next_head == TX_RING_BUFFER) { next_head = 0; }
@@ -104,20 +105,19 @@ void serial_write(uint8_t data) {
   serial_tx_buffer_head = next_head;
 
   // Enable Data Register Empty Interrupt to make sure tx-streaming is running
-  UCSR0B |=  (1 << UDRIE0);
-  */
+  SciaRegs.SCICTL2.bit.TXINTENA = 1;
 }
 
 
 // Data Register Empty Interrupt handler
-// TODO
-/*
-ISR(SERIAL_UDRE)
+// 9.2 - SCIA Transmit Interrupt
+//
+interrupt void SCIA_TX_ISR(void)
 {
   uint8_t tail = serial_tx_buffer_tail; // Temporary serial_tx_buffer_tail (to optimize for volatile)
 
   // Send a byte from the buffer
-  UDR0 = serial_tx_buffer[tail];
+  SciaRegs.SCITXBUF.bit.TXDT = serial_tx_buffer[tail];
 
   // Update tail position
   tail++;
@@ -126,9 +126,12 @@ ISR(SERIAL_UDRE)
   serial_tx_buffer_tail = tail;
 
   // Turn off Data Register Empty Interrupt to stop tx-streaming if this concludes the transfer
-  if (tail == serial_tx_buffer_head) { UCSR0B &= ~(1 << UDRIE0); }
+  if (tail == serial_tx_buffer_head) { SciaRegs.SCICTL2.bit.TXINTENA = 0; }
+
+  // To receive more interrupts from this PIE group,
+  // acknowledge this interrupt.
+  PieCtrlRegs.PIEACK.all = PIEACK_GROUP9;
 }
-*/
 
 // Fetches the first byte in the serial read buffer. Called by main program.
 uint8_t serial_read()
@@ -147,11 +150,13 @@ uint8_t serial_read()
   }
 }
 
-// TODO
-/*
-ISR(SERIAL_RX)
+
+//
+// 9.1 - SCIA Receive Interrupt
+//
+interrupt void SCIA_RX_ISR(void)
 {
-  uint8_t data = UDR0;
+  uint8_t data = SciaRegs.SCIRXBUF.bit.SAR;
   uint8_t next_head;
 
   // Pick off realtime command characters directly from the serial stream. These characters are
@@ -204,8 +209,10 @@ ISR(SERIAL_RX)
         }
       }
   }
+  // To receive more interrupts from this PIE group,
+  // acknowledge this interrupt.
+  PieCtrlRegs.PIEACK.all = PIEACK_GROUP9;
 }
-*/
 
 void serial_reset_read_buffer()
 {
