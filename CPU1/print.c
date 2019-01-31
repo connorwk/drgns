@@ -40,16 +40,18 @@ void printPgmString(const char *s)
   while ((c = pgm_read_byte_near(s++)))
     serial_write(c);
   */
+  while(*s) serial_write(*s++);
 }
 
 // HERE TO MAKE CODE COMPILE FOR NOW...
 // TODO REMOVE ALL INSTANCES OF PSTR IN CODE AND REPLACE WITH TI EQUIVELANT
+/*
 void PSTR(const char *s)
 {
   // TODO
   // https://www.nongnu.org/avr-libc/user-manual/group__avr__pgmspace.html
 }
-
+*/
 // void printIntegerInBase(unsigned long n, unsigned long base)
 // {
 // 	unsigned char buf[8 * sizeof(long)]; // Assumes 8-bit chars.

@@ -23,6 +23,47 @@
 
 void system_init()
 {
+  //
+  // Step 1. Initialize System Control:
+  // PLL, WatchDog, enable Peripheral Clocks
+  // This example function is found in the F2837xD_SysCtrl.c file.
+  //
+  InitSysCtrl();
+
+  #ifdef _STANDALONE
+  #ifdef _FLASH
+  //
+  // Send boot command to allow the CPU2 application to begin execution
+  //
+  IPCBootCPU2(C1C2_BROM_BOOTMODE_BOOT_FROM_FLASH);
+  #else
+  //
+  // Send boot command to allow the CPU2 application to begin execution
+  //
+  IPCBootCPU2(C1C2_BROM_BOOTMODE_BOOT_FROM_RAM);
+  #endif
+  #endif
+
+  //
+  // Call Flash Initialization to setup flash waitstates
+  // This function must reside in RAM
+  //
+  #ifdef _FLASH
+     InitFlash();
+  #endif
+  //
+  // Step 2. Initialize GPIO:
+  // This example function is found in the F2837xD_Gpio.c file and
+  // illustrates how to set the GPIO to it's default state.
+  //
+  InitGpio();
+  InitEQepGpio();
+  EALLOW;
+
+  // Serial through FTDI setup.
+  GPIO_SetupPinMux(43, GPIO_MUX_CPU1, 15);
+  GPIO_SetupPinMux(42, GPIO_MUX_CPU1, 15);
+
   // TODO
   /*
   CONTROL_DDR &= ~(CONTROL_MASK); // Configure as input pins
@@ -34,6 +75,54 @@ void system_init()
   CONTROL_PCMSK |= CONTROL_MASK;  // Enable specific pins of the Pin Change Interrupt
   PCICR |= (1 << CONTROL_INT);   // Enable Pin Change Interrupt
   */
+  EDIS;
+
+  //
+  // Step 3. Clear all interrupts and initialize PIE vector table:
+  // Disable CPU interrupts
+  //
+
+  DINT;
+
+  //
+  // Initialize the PIE control registers to their default state.
+  // The default state is all PIE interrupts disabled and flags
+  // are cleared.
+  // This function is found in the F2837xD_PieCtrl.c file.
+  //
+
+  InitPieCtrl();
+
+  //
+  // Disable CPU interrupts and clear all CPU interrupt flags:
+  //
+
+  IER = 0x0000;
+  IFR = 0x0000;
+
+  //
+  // Initialize the PIE vector table with pointers to the shell Interrupt
+  // Service Routines (ISR).
+  // This will populate the entire table, even if the interrupt
+  // is not used in this example.  This is useful for debug purposes.
+  // The shell ISR routines are found in F2837xD_DefaultIsr.c.
+  // This function is found in F2837xD_PieVect.c.
+  //
+
+  InitPieVectTable();
+
+  // Enable interrupts according to 3.4.5 PIE Channel Mapping table.
+
+  PieCtrlRegs.PIEIER9.bit.INTx1 = 1; // Enable SCIA_RX
+  PieCtrlRegs.PIEIER9.bit.INTx2 = 1; // Enable SCIA_TX
+  PieCtrlRegs.PIECTRL.bit.ENPIE = 1; // Enable the PIE.
+
+  //
+  // Enable global Interrupts and higher priority real-time debug events:
+  //
+
+  IER |= M_INT9; // Enable INT9 group from PIE
+  //ERTM;  // Enable Global realtime interrupt DBGM
 }
 
 

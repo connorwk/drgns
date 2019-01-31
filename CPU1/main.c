@@ -42,14 +42,14 @@ volatile uint8_t sys_rt_exec_accessory_override; // Global realtime executor bit
 int main(void)
 {
   // Initialize system upon power-up.
+  system_init();   // Init system and interrupts and configure pinout pins and pin-change interrupt
   serial_init();   // Setup serial baud rate and interrupts
   settings_init(); // Load Grbl settings from EEPROM
   stepper_init();  // Configure stepper pins and interrupt timers
-  system_init();   // Configure pinout pins and pin-change interrupt
 
   memset(sys_position,0,sizeof(sys_position)); // Clear machine position.
-  // TODO all of this will be replaced eventually but this is the only line to be commented out for compile:
-  //sei(); // Enable interrupts
+  // TODO This is still the old sei() everywhere else, used by the old AVR code. I don't think we will need to be using it elsewere to disable/enable interrupts since we aren't so limited by resources.
+  EINT;  // Enable Global interrupt INTM
 
   // Initialize system state.
   #ifdef FORCE_INITIALIZATION_ALARM
