@@ -49,7 +49,7 @@ int main(void)
 
   memset(sys_position,0,sizeof(sys_position)); // Clear machine position.
   // TODO This is still the old sei() everywhere else, used by the old AVR code. I don't think we will need to be using it elsewere to disable/enable interrupts since we aren't so limited by resources.
-  EINT;  // Enable Global interrupt INTM
+  //EINT;  // Enable Global interrupt INTM
 
   // Initialize system state.
   #ifdef FORCE_INITIALIZATION_ALARM

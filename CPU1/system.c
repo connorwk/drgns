@@ -64,6 +64,9 @@ void system_init()
   GPIO_SetupPinMux(43, GPIO_MUX_CPU1, 15);
   GPIO_SetupPinMux(42, GPIO_MUX_CPU1, 15);
 
+  // DEBUG TODO
+  //GpioCtrlRegs.GPADIR.bit.GPIO31 = 1; // Output
+  //GpioDataRegs.GPADAT.bit.GPIO31 = 1; // turn off LED
   // TODO
   /*
   CONTROL_DDR &= ~(CONTROL_MASK); // Configure as input pins
@@ -122,6 +125,7 @@ void system_init()
   //
 
   IER |= M_INT9; // Enable INT9 group from PIE
+  EINT;  // Enable Global interrupt INTM
   //ERTM;  // Enable Global realtime interrupt DBGM
 }
 
@@ -192,6 +196,7 @@ uint8_t system_check_safety_door_ajar()
 
 
 // Executes user startup script, if stored.
+// TODO
 void system_execute_startup(char *line)
 {
   uint8_t n;

@@ -60,7 +60,8 @@ void protocol_main_loop()
       protocol_execute_realtime(); // Enter safety door mode. Should return as IDLE state.
     }
     // All systems go!
-    system_execute_startup(line); // Execute startup script.
+    // TODO
+    //system_execute_startup(line); // Execute startup script.
   }
 
   // ---------------------------------------------------------------------------------
